@@ -14,17 +14,17 @@ public class LoginPage {
     /**
      * определение локатора поля ввода логина
      */
-    @FindBy(xpath = "//*[contains(@id, 'passp-field-login')]")
+    @FindBy(xpath = "//*[contains(@name, 'username')]")
     private WebElement loginField;
     /**
      * определение локатора кнопки входа в аккаунт
      */
-    @FindBy(xpath = "//*[contains(text(), 'Войти')]/..")
+    @FindBy(xpath = "//button[contains(@name, 'login')]")
     private WebElement loginBtn;
     /**
      * определение локатора поля ввода пароля
      */
-    @FindBy(xpath = "//*[contains(@id, 'passp-field-passwd')]")
+    @FindBy(xpath = "//*[contains(@name, 'password')]")
     private WebElement passwdField;
     /**
      * метод для ввода логина
