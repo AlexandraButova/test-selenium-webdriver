@@ -10,10 +10,27 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import static junit.framework.TestCase.assertTrue;
 
 public class LoginLitecart {
     private WebDriver driver;
     private WebDriverWait wait;
+    private Object locator;
+
+    public boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean areElementsPresent(By locator) {
+        return driver.findElements(locator).size() > 0;
+    }
 
     @Before
     public void start() {
@@ -40,11 +57,12 @@ public class LoginLitecart {
         driver.findElement(By.cssSelector("div.footer [name = login]")).click();
         List<WebElement> elements = driver.findElements(By.xpath("//ul[@id='box-apps-menu']//li"));
         // elements.size() кол-во элементов в списке пунктов меню.
-        for (int i = 1; i <= elements.size() ; i++) {
-            driver.findElement(By.xpath("//ul[@id='box-apps-menu']/li["+i+"]")).click();
+        for (int i = 1; i <= elements.size(); i++) {
+            driver.findElement(By.xpath("//ul[@id='box-apps-menu']/li[" + i + "]")).click();
             List<WebElement> element = driver.findElements(By.xpath("//ul[@class='docs']/li"));
-            for (int j = 1; j < element.size() + 1; j++){
-                driver.findElement(By.xpath("//ul[@class='docs']//li["+j+"]")).click();
+            for (int j = 1; j < element.size() + 1; j++) {
+                driver.findElement(By.xpath("//ul[@class='docs']//li[" + j + "]")).click();
+                assertTrue(isElementPresent(By.xpath("//td[@id='content']//h1")));
             }
         }
     }
