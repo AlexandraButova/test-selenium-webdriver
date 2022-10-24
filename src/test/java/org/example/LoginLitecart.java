@@ -67,6 +67,14 @@ public class LoginLitecart {
         }
     }
 
+    @Test
+    public void sticker(){
+        driver.get("http://localhost/litecart");//div[contains(@id,'box')]  //li[contains(@class,'product')]
+        List<WebElement> elements = driver.findElements(By.xpath("//li[contains(@class,'product')]"));
+        List<WebElement> stickers = driver.findElements(By.xpath("//div[contains(@class,'sticker')]"));
+        assertTrue(elements.size() == stickers.size());
+    }
+
     @After
     public void stop() {
         driver.quit();
